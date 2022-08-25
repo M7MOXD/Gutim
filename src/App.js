@@ -2,8 +2,6 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle';
 import Home from './components/home';
 import Branches from './components/branch';
 import Classes from './components/classes';
