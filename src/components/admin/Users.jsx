@@ -8,7 +8,7 @@ export default function AdminUsers() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/users/profile/')
+      .get('https://gymmanagementapi.herokuapp.com/api/users/profile/')
       .then((res) => {
         setUsers(res.data);
       })

@@ -24,7 +24,7 @@ export default function AdminPlans() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/sub/plan/')
+      .get('https://gymmanagementapi.herokuapp.com/api/sub/plan/')
       .then((res) => {
         setPlans(res.data);
       })
@@ -36,7 +36,7 @@ export default function AdminPlans() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8000/api/sub/plan/${id}/`, {
+      .delete(`https://gymmanagementapi.herokuapp.com/api/sub/plan/${id}/`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -114,15 +114,17 @@ export default function AdminPlans() {
     }
     if (!Object.keys(errors).length) {
       axios
-        .post('http://localhost:8000/api/sub/plan/', newPlan, {
+        .post('https://gymmanagementapi.herokuapp.com/api/sub/plan/', newPlan, {
           headers: {
             authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-          axios.get('http://localhost:8000/api/sub/plan/').then((res) => {
-            setPlans(res.data);
-          });
+          axios
+            .get('https://gymmanagementapi.herokuapp.com/api/sub/plan/')
+            .then((res) => {
+              setPlans(res.data);
+            });
           setCreateForm(false);
         })
         .catch((err) => {
@@ -232,11 +234,15 @@ export default function AdminPlans() {
     }
     if (!Object.keys(errors).length) {
       axios
-        .put(`http://localhost:8000/api/sub/plan/${editPlan.id}/`, editPlan, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://gymmanagementapi.herokuapp.com/api/sub/plan/${editPlan.id}/`,
+          editPlan,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           const newPlans = plans.filter((plan) => {
             return plan.id !== editPlan.id;

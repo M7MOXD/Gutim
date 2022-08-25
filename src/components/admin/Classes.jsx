@@ -26,7 +26,7 @@ export default function AdminClasses() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/classes/')
+      .get('https://gymmanagementapi.herokuapp.com/api/classes/')
       .then((res) => {
         setClasses(res.data);
       })
@@ -35,11 +35,14 @@ export default function AdminClasses() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8000/api/events/modify/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(
+        `https://gymmanagementapi.herokuapp.com/api/events/modify/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         setClasses(
@@ -114,15 +117,17 @@ export default function AdminClasses() {
     console.log(errors);
     if (!Object.keys(errors).length) {
       axios
-        .post('http://localhost:8000/api/classes/', newClass, {
+        .post('https://gymmanagementapi.herokuapp.com/api/classes/', newClass, {
           headers: {
             authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-          axios.get('http://localhost:8000/api/classes/').then((res) => {
-            setClasses(res.data);
-          });
+          axios
+            .get('https://gymmanagementapi.herokuapp.com/api/classes/')
+            .then((res) => {
+              setClasses(res.data);
+            });
           setCreateClass(false);
         })
         .catch((err) => {
@@ -247,11 +252,15 @@ export default function AdminClasses() {
     console.log(errors);
     if (!Object.keys(errors).length) {
       axios
-        .put(`http://localhost:8000/api/classes/${editClass.id}/`, editClass, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://gymmanagementapi.herokuapp.com/api/classes/${editClass.id}/`,
+          editClass,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           const newClasses = classes.filter((cls) => {
             return cls.id !== editClass.id;
@@ -335,7 +344,7 @@ export default function AdminClasses() {
 
   const retrieveClassInfo = (id) => {
     axios
-      .get(`http://localhost:8000/api/classes/${id}/`)
+      .get(`https://gymmanagementapi.herokuapp.com/api/classes/${id}/`)
       .then((res) => {
         setSingleClass(res.data);
       })

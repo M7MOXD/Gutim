@@ -37,21 +37,21 @@ export default function AdminTrainers() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/trainers/')
+      .get('https://gymmanagementapi.herokuapp.com/api/trainers/')
       .then((res) => {
         setTrainers(res.data);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get('http://localhost:8000/api/branch/')
+      .get('https://gymmanagementapi.herokuapp.com/api/branch/')
       .then((res) => {
         setBranches(res.data);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get('http://localhost:8000/api/classes/')
+      .get('https://gymmanagementapi.herokuapp.com/api/classes/')
       .then((res) => {
         setClasses(res.data);
       })
@@ -60,11 +60,14 @@ export default function AdminTrainers() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8000/api/trainers/delete/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(
+        `https://gymmanagementapi.herokuapp.com/api/trainers/delete/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         setTrainers(
           trainers.filter((trainer) => {
@@ -207,16 +210,22 @@ export default function AdminTrainers() {
     });
     if (!Object.keys(errors).length) {
       axios
-        .post('http://localhost:8000/api/trainers/create/', newTrainer, {
-          headers: {
-            authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        })
+        .post(
+          'https://gymmanagementapi.herokuapp.com/api/trainers/create/',
+          newTrainer,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        )
         .then((res) => {
-          axios.get('http://localhost:8000/api/trainers/').then((res) => {
-            setTrainers(res.data);
-          });
+          axios
+            .get('https://gymmanagementapi.herokuapp.com/api/trainers/')
+            .then((res) => {
+              setTrainers(res.data);
+            });
           setCreateForm(false);
         })
         .catch((err) => {
@@ -438,7 +447,7 @@ export default function AdminTrainers() {
     if (!Object.keys(errors).length) {
       axios
         .patch(
-          `http://localhost:8000/api/trainers/update/${editTrainer.id}/`,
+          `https://gymmanagementapi.herokuapp.com/api/trainers/update/${editTrainer.id}/`,
           editTrainer,
           {
             headers: {

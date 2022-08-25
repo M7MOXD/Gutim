@@ -24,7 +24,7 @@ export default function AdminBranches() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/branch/')
+      .get('https://gymmanagementapi.herokuapp.com/api/branch/')
       .then((res) => {
         setBranches(res.data);
       })
@@ -33,11 +33,14 @@ export default function AdminBranches() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8000/api/branch/delete/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(
+        `https://gymmanagementapi.herokuapp.com/api/branch/delete/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         setBranches(
           branches.filter((branch) => {
@@ -104,15 +107,21 @@ export default function AdminBranches() {
     });
     if (!Object.keys(errors).length) {
       axios
-        .post('http://localhost:8000/api/branch/create/', newBranch, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          'https://gymmanagementapi.herokuapp.com/api/branch/create/',
+          newBranch,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
-          axios.get('http://localhost:8000/api/branch').then((res) => {
-            setBranches(res.data);
-          });
+          axios
+            .get('https://gymmanagementapi.herokuapp.com/api/branch')
+            .then((res) => {
+              setBranches(res.data);
+            });
           setCreateModal(false);
         })
         .catch((err) => {
@@ -122,12 +131,11 @@ export default function AdminBranches() {
     }
   };
 
-
-  const activateCreateModal = (e) =>{
+  const activateCreateModal = (e) => {
     e.preventDefault();
-    setCreateModal(true)
-    setEditModal(false)
-  }
+    setCreateModal(true);
+    setEditModal(false);
+  };
 
   const renderCreateModal = () => {
     return (
@@ -188,7 +196,7 @@ export default function AdminBranches() {
   const activateEditModal = (e, branch) => {
     e.preventDefault();
     setEditModal(true);
-    setCreateModal(false)
+    setCreateModal(false);
     setEditBranch(branch);
   };
 
@@ -242,7 +250,7 @@ export default function AdminBranches() {
     if (!Object.keys(errors).length) {
       axios
         .put(
-          `http://localhost:8000/api/branch/update/${editBranch.id}/`,
+          `https://gymmanagementapi.herokuapp.com/api/branch/update/${editBranch.id}/`,
           editBranch,
           {
             headers: {

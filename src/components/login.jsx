@@ -7,7 +7,7 @@ import axios from 'axios';
 import Header from './header';
 import Footer from './footer';
 import Google from './google';
-const baseUrl = 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://gymmanagementapi.herokuapp.com/api';
 
 export default function Login() {
   const nav = useNavigate();

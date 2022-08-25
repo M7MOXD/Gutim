@@ -5,7 +5,7 @@ import axios from 'axios';
 import Header from './header';
 import Footer from './footer';
 import { NavLink } from 'react-router-dom';
-const baseUrl = 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://gymmanagementapi.herokuapp.com/api';
 
 export default function Events() {
   const [eventData, setEventData] = useState([]);
@@ -56,11 +56,11 @@ export default function Events() {
           </div>
           <div className="row">
             {eventData.map((event) => {
-              try{
-                var start_date = event.start_date.slice(0, 10)
-                var end_date = event.end_date.slice(0, 10)
+              try {
+                var start_date = event.start_date.slice(0, 10);
+                var end_date = event.end_date.slice(0, 10);
               } catch {}
-              
+
               return (
                 <div className="col-lg-4">
                   <div

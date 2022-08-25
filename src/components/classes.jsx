@@ -5,7 +5,7 @@ import axios from 'axios';
 import Header from './header';
 import Footer from './footer';
 import { NavLink } from 'react-router-dom';
-const baseUrl = 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://gymmanagementapi.herokuapp.com/api';
 
 export default function Classes() {
   const [classData, setClassData] = useState([]);

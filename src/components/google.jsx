@@ -11,7 +11,7 @@ export default function Google() {
   function handelCallbackResponse(res) {
     console.log(res);
     axios
-      .post('http://localhost:8000/api/users/google/', {
+      .post('https://gymmanagementapi.herokuapp.com/api/users/google/', {
         auth_token: res.credential,
       })
       .then((res) => {

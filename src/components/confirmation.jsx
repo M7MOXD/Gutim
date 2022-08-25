@@ -4,7 +4,7 @@ import { useSearchParams, useNavigate, NavLink } from 'react-router-dom';
 import Footer from './footer';
 import Header from './header';
 import axios from 'axios';
-const baseUrl = 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://gymmanagementapi.herokuapp.com/api';
 
 export default function Confirmation() {
   const auth = useSelector((state) => state.auth.value);

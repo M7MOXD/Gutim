@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-const baseUrl = 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://gymmanagementapi.herokuapp.com/api';
 
 export default function Paypal(props) {
   const auth = useSelector((state) => state.auth.value);

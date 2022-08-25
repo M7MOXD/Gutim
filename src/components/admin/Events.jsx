@@ -31,7 +31,7 @@ export default function AdminEvents() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/events/')
+      .get('https://gymmanagementapi.herokuapp.com/api/events/')
       .then((res) => {
         setEvents(res.data);
       })
@@ -40,11 +40,14 @@ export default function AdminEvents() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8000/api/events/modify/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(
+        `https://gymmanagementapi.herokuapp.com/api/events/modify/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         setEvents(
           events.filter((event) => {
@@ -158,16 +161,22 @@ export default function AdminEvents() {
     });
     if (!Object.keys(errors).length) {
       axios
-        .post('http://localhost:8000/api/events/create/', newEvent, {
-          headers: {
-            authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        })
+        .post(
+          'https://gymmanagementapi.herokuapp.com/api/events/create/',
+          newEvent,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        )
         .then((res) => {
-          axios.get('http://localhost:8000/api/events/').then((res) => {
-            setEvents(res.data);
-          });
+          axios
+            .get('https://gymmanagementapi.herokuapp.com/api/events/')
+            .then((res) => {
+              setEvents(res.data);
+            });
           setCreateForm(false);
         })
         .catch((err) => {
@@ -357,7 +366,7 @@ export default function AdminEvents() {
     if (!Object.keys(errors).length) {
       axios
         .patch(
-          `http://localhost:8000/api/events/modify/${editEvent.id}/`,
+          `https://gymmanagementapi.herokuapp.com/api/events/modify/${editEvent.id}/`,
           editEvent,
           {
             headers: {

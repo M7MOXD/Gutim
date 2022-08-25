@@ -6,7 +6,7 @@ import Header from './header';
 import Footer from './footer';
 import Paypal from './paypal';
 import axios from 'axios';
-const baseUrl = 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://gymmanagementapi.herokuapp.com/api';
 
 export default function Home() {
   const auth = useSelector((state) => state.auth.value);
