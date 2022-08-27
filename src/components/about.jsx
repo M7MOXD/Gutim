@@ -49,12 +49,6 @@ export default function About() {
             <div className="col-lg-6">
               <div className="about-pic">
                 <img src="img/about-pic.jpg" alt="" />
-                <NavLink
-                  to="https://www.youtube.com/watch?v=SlPhMPnQ58k"
-                  className="play-btn video-popup"
-                >
-                  <img src="img/play.png" alt="" />
-                </NavLink>
               </div>
             </div>
             <div className="col-lg-6">

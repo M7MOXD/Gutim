@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth } from '../redux/reducers/authSlice';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -60,6 +60,7 @@ export default function Header() {
         console.log(err);
       });
   };
+  useEffect(() => window.scrollTo(0, 0), []);
   return (
     <React.Fragment>
       <header className="header-section">

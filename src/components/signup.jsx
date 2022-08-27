@@ -65,7 +65,7 @@ export default function Signup() {
     }
     if (!state.username) {
       errors.username = 'Username is Required';
-    } else if (state.name.length < 8) {
+    } else if (state.username.length < 8) {
       errors.username = 'Username must be greater than 8 character';
     } else if (!/^[a-zA-Z\s]+$/.test(state.username)) {
       errors.username = 'Username must be String';
