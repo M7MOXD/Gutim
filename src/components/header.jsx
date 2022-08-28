@@ -58,6 +58,8 @@ export default function Header() {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.clear();
+        nav('/');
       });
   };
   useEffect(() => window.scrollTo(0, 0), []);
@@ -65,70 +67,103 @@ export default function Header() {
     <React.Fragment>
       <header className="header-section">
         <div className="container">
-          <div className="logo">
-            <NavLink to="/">
-              <img src="img/logo.png" alt="" />
-            </NavLink>
-          </div>
-          <div className="nav-menu">
-            <nav className="mainmenu mobile-menu">
-              <ul>
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/branch">Branches</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/classes">Classes</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/event">Events</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/gallery">Gallery</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/about">About</NavLink>
-                </li>
-              </ul>
-            </nav>
-            {!auth && (
-              <NavLink to="/signup" className="primary-btn signup-btn">
-                Sign Up Today
+          <nav className="navbar navbar-expand-lg bg-transparent">
+            <div className="container-fluid">
+              <NavLink className="navbar-brand" to="/">
+                <img src="img/logo.png" alt="" />
               </NavLink>
-            )}
-            {!auth && (
-              <NavLink to="/login" className="primary-btn signup-btn">
-                Login
-              </NavLink>
-            )}
-            {localStorage.getItem('is_staff') === 'true' && (
-              <NavLink
-                to="/admin"
-                className="btn btn-outline-danger signup-btn"
-              >
-                Admin
-              </NavLink>
-            )}
-            {localStorage.getItem('is_staff') === 'false' && (
-              <NavLink
-                to="/profile"
-                className="btn btn-outline-danger signup-btn"
-              >
-                Profile
-              </NavLink>
-            )}
-            {auth && (
               <button
-                className="btn btn-outline-danger signup-btn"
-                onClick={logout}
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-                Logout
+                <span className="navbar-toggler-icon"></span>
               </button>
-            )}
-          </div>
-          <div id="mobile-menu-wrap"></div>
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-light" to="/home">
+                      Home
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-light" to="/branch">
+                      Branches
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-light" to="/classes">
+                      Classes
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-light" to="/event">
+                      Events
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-light" to="/gallery">
+                      Gallery
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-light" to="/about">
+                      About
+                    </NavLink>
+                  </li>
+                </ul>
+                <div className="d-flex flex-column flex-lg-row">
+                  {!auth && (
+                    <NavLink
+                      to="/signup"
+                      className="primary-btn nav-link text-light me-2 mb-2"
+                    >
+                      Sign Up Today
+                    </NavLink>
+                  )}
+                  {!auth && (
+                    <NavLink
+                      to="/login"
+                      className="primary-btn nav-link text-light"
+                    >
+                      Login
+                    </NavLink>
+                  )}
+                  {localStorage.getItem('is_staff') === 'true' && (
+                    <NavLink
+                      to="/admin"
+                      className="primary-btn nav-link text-light me-2 mb-2"
+                    >
+                      Admin
+                    </NavLink>
+                  )}
+                  {localStorage.getItem('is_staff') === 'false' && (
+                    <NavLink
+                      to="/profile"
+                      className="primary-btn nav-link text-light me-2 mb-2"
+                    >
+                      Profile
+                    </NavLink>
+                  )}
+                  {auth && (
+                    <button
+                      className="primary-btn nav-link text-light"
+                      onClick={logout}
+                    >
+                      Logout
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </nav>
         </div>
       </header>
     </React.Fragment>

@@ -67,9 +67,9 @@ export default function Login() {
               <div className="breadcrumb-text">
                 <h2>Login</h2>
                 <div className="breadcrumb-option">
-                  <a href="./index.html">
+                  <NavLink to="/">
                     <i className="fa fa-home"></i> Home
-                  </a>
+                  </NavLink>
                   <span>Login</span>
                 </div>
               </div>

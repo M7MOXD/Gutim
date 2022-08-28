@@ -67,7 +67,6 @@ export default function Footer() {
             </div>
           </div>
           <div className="copyright-text">
-            <p>&copy;</p>
             <p>
               Copyright &copy;
               <script>document.write(new Date().getFullYear());</script>
