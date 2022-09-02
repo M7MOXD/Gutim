@@ -52,7 +52,7 @@ export default function Paypal(props) {
               );
             } else if (props.type === 'event') {
               axios.post(
-                `${baseUrl}/events/subscribe/`,
+                `${baseUrl}/events/participants/subscribe/`,
                 {
                   event: props.context.name,
                   attend_status: 'going',
