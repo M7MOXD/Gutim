@@ -149,7 +149,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="trainer-section spad">
+      <section className="trainer-section spad" class="my-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -212,7 +212,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="membership-section spad mb-5">
+      <section className="membership-section spad" class="my-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">

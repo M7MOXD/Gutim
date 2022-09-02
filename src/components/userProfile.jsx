@@ -9,6 +9,9 @@ export default function UserProfile() {
   const nav = useNavigate();
   const [userData, setUserData] = useState({});
   const [profileData, setProfileData] = useState({});
+  const [planData, setPlanData] = useState({});
+  const [eventData, setEventData] = useState([]);
+  const [classData, setClassData] = useState([]);
 
   const handleChange = (e) => {
     setUserData({
@@ -50,6 +53,7 @@ export default function UserProfile() {
     ) {
       nav('/');
     }
+
     axios
       .get(`${baseUrl}/users/profile/${localStorage.getItem('user_id')}/`, {
         headers: {
@@ -58,9 +62,110 @@ export default function UserProfile() {
       })
       .then((res) => {
         setProfileData(res.data);
+        localStorage.setItem('username', res.data.user);
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(`${baseUrl}/sub/subscription/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+      })
+      .then((res) => {
+        axios
+          .get(`${baseUrl}/sub/plan/${res.data[0]?.plan_id}`)
+          .then((xres) => {
+            setPlanData({ ...xres.data, del_id: res.data[0].id });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(`${baseUrl}/events/participants/list`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+      })
+      .then((res) => {
+        setEventData(
+          res.data.filter((e) => {
+            return e.participant === localStorage.getItem('username');
+          })
+        );
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(`${baseUrl}/classes/attendant/list/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+      })
+      .then((res) => {
+        setClassData(
+          res.data.filter((e) => {
+            return e.attendant === localStorage.getItem('username');
+          })
+        );
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const cancel = (type, data) => {
+    if (type === 'plan') {
+      axios
+        .delete(`${baseUrl}/sub/subscription/${data}/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access')}`,
+          },
+        })
+        .then((res) => {
+          setPlanData({});
+        });
+    } else if (type === 'class') {
+      axios
+        .post(
+          `${baseUrl}/classes/attendant/unsubscribe/`,
+          {
+            clas: data,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('access')}`,
+            },
+          }
+        )
+        .then((res) => {
+          setClassData(
+            classData.filter((x) => {
+              return x.clas !== data;
+            })
+          );
+        });
+    } else if (type === 'event') {
+      axios
+        .post(
+          `${baseUrl}/events/participants/unsubscribe/`,
+          {
+            event: data,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('access')}`,
+            },
+          }
+        )
+        .then((res) => {
+          setEventData(
+            eventData.filter((x) => {
+              return x.event !== data;
+            })
+          );
+        });
+    }
+  };
 
   return (
     <React.Fragment>
@@ -290,6 +395,136 @@ export default function UserProfile() {
           </div>
         </section>
       </div>
+
+      <section className="membership-section spad" class="my-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="section-title">
+                <h2>MEMBERSHIP PLAN</h2>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            {planData.id && (
+              <div className="col-lg-4">
+                <div
+                  className="membership-item my-3"
+                  style={{
+                    height: '420px',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <div className="mi-title">
+                    <h4>{planData.name}</h4>
+                    <div className="triangle"></div>
+                  </div>
+                  <h2 className="mi-price">
+                    {Math.round(planData.price)}
+                    <span> USD /mo</span>
+                  </h2>
+                  <ul>
+                    <li>
+                      <p>Duration</p>
+                      <span>{planData.duration_months} Month</span>
+                    </li>
+                  </ul>
+                  <div className="w-75 mx-auto mt-5">
+                    <button
+                      className="btn btn-danger w-100"
+                      onClick={() => cancel('plan', planData.del_id)}
+                    >
+                      Unsubscribe
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+      <hr className="text-danger" />
+      <section className="membership-section spad" class="my-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="section-title">
+                <h2>Events</h2>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            {eventData.map((event) => {
+              try {
+                var start_date = event.start_date.slice(0, 10);
+                var end_date = event.end_date.slice(0, 10);
+              } catch {}
+
+              return (
+                <div className="col-lg-4">
+                  <div className="membership-item my-3">
+                    <div className="mi-title">
+                      <h4>{event.event}</h4>
+                      <div className="triangle"></div>
+                      <img src="{event.image}" alt="" />
+                    </div>
+                    <p className="fs-3">Buy a Ticket</p>
+                    <div className="w-75 mx-auto mt-5">
+                      <button
+                        className="btn btn-danger w-100"
+                        onClick={() => cancel('event', event.event)}
+                      >
+                        Unsubscribe
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+      <hr className="text-danger" />
+      <section className="classes-section classes-page spad" class="my-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="section-title">
+                <h2>UNLIMITED CLASSES</h2>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            {classData.map((cls, i) => {
+              if (i > 8) {
+                i = 0;
+              }
+              return (
+                <div className="col-lg-4 col-md-6 mb-5">
+                  <div className="single-trainer-item">
+                    <img
+                      src={`img/classes/classes-${i > 8 ? i - 1 : i + 1}.jpg`}
+                      alt=""
+                    />
+                    <div className="trainer-text">
+                      <h5>{cls.clas}</h5>
+                      <span>More Info</span>
+                      <div className="w-75 mx-auto mt-5">
+                        <button
+                          className="btn btn-danger w-100"
+                          onClick={() => cancel('class', cls.clas)}
+                        >
+                          Unsubscribe
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
       <Footer />
     </React.Fragment>
   );
