@@ -468,7 +468,7 @@ export default function UserProfile() {
                       <div className="triangle"></div>
                       <img src="{event.image}" alt="" />
                     </div>
-                    <p className="fs-3">Buy a Ticket</p>
+                    <p className="fs-3">Unsubscribe</p>
                     <div className="w-75 mx-auto mt-5">
                       <button
                         className="btn btn-danger w-100"
