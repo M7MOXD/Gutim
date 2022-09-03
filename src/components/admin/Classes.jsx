@@ -35,14 +35,11 @@ export default function AdminClasses() {
 
   const deleteItem = (id) => {
     axios
-      .delete(
-        `https://gymmanagementapi.herokuapp.com/api/events/modify/${id}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .delete(`https://gymmanagementapi.herokuapp.com/api/classes/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         console.log(res);
         setClasses(
