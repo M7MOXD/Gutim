@@ -130,33 +130,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      <section className="trainer-section about-trainer spad">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="section-title">
-                <h2>EXPERT TRAINERS</h2>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            {trainerData.map(() => {
-              return (
-                <div className="col-lg-4 col-md-6">
-                  <div className="single-trainer-item">
-                    <img src="{trainerData.image}" alt="" />
-                    <div className="trainer-text">
-                      <h5>{trainerData.name}</h5>
-                      <span>{trainerData.experience} Years of Experience.</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
       <Footer />
     </React.Fragment>
   );
