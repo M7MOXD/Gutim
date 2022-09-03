@@ -171,10 +171,7 @@ export default function Home() {
                     <div className="trainer-text">
                       <h5>{trainer.name}</h5>
                       <span>{trainer.experience} Years of Experience.</span>
-                      <p>
-                        non numquam eius modi tempora incidunt ut labore et
-                        dolore magnam aliquam quaerat voluptatem.
-                      </p>
+                      <p>{trainer.name} one of our best Coaches.</p>
                     </div>
                   </div>
                 </div>
