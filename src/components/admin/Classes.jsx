@@ -51,7 +51,7 @@ export default function AdminClasses() {
           })
         );
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   };
 
   const deleteClass = (e, id) => {
@@ -132,7 +132,6 @@ export default function AdminClasses() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data.detail);
         });
     }
   };
@@ -271,7 +270,6 @@ export default function AdminClasses() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data.detail);
         });
     }
   };
@@ -295,7 +293,7 @@ export default function AdminClasses() {
                     type="text"
                     className="form-control"
                     placeholder="Name"
-                    value={editClass.name}
+                    defaultValue={editClass.name}
                     onChange={getEditClassName}
                   />
                 </div>
@@ -304,7 +302,7 @@ export default function AdminClasses() {
                   <textarea
                     className="form-control"
                     placeholder="Description"
-                    value={editClass.description}
+                    defaultValue={editClass.description}
                     onChange={getEditClassDescription}
                     rows={3}
                   />
@@ -315,7 +313,7 @@ export default function AdminClasses() {
                     type="text"
                     className="form-control"
                     placeholder="Price"
-                    value={editClass.price}
+                    defaultValue={editClass.price}
                     onChange={getEditClassPrice}
                   />
                 </div>

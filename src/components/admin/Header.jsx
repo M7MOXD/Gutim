@@ -60,12 +60,15 @@ export default function AdminHeader() {
         localStorage.removeItem('access');
         localStorage.removeItem('user_id');
         localStorage.removeItem('is_staff');
+        localStorage.clear();
         dispatch(setAuth(false));
-        console.log(res);
         nav('/');
       })
       .catch((err) => {
         console.log(err);
+        localStorage.clear();
+        dispatch(setAuth(false));
+        nav('/');
       });
   };
   return (

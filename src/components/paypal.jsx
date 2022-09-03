@@ -64,7 +64,6 @@ export default function Paypal(props) {
                 }
               );
             }
-            alert('Transaction completed by ' + details.payer.name.given_name);
           });
         },
         onCancel: function (data) {

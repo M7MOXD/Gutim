@@ -48,7 +48,7 @@ export default function AdminBranches() {
           })
         );
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   };
 
   const deleteBranch = (e, id) => {
@@ -126,7 +126,6 @@ export default function AdminBranches() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data.detail);
         });
     }
   };
@@ -269,7 +268,6 @@ export default function AdminBranches() {
 
         .catch((err) => {
           console.log(err);
-          alert(err.response.data.detail);
         });
     }
   };
@@ -293,7 +291,7 @@ export default function AdminBranches() {
                     type="text"
                     className="form-control"
                     placeholder="Name"
-                    value={editBranch.name}
+                    defaultValue={editBranch.name}
                     onChange={getEditBranchName}
                   />
                 </div>
@@ -303,7 +301,7 @@ export default function AdminBranches() {
                     type="text"
                     className="form-control"
                     placeholder="Address"
-                    value={editBranch.address}
+                    defaultValue={editBranch.address}
                     onChange={getEditBranchAddress}
                   />
                 </div>
@@ -313,7 +311,7 @@ export default function AdminBranches() {
                     type="text"
                     className="form-control"
                     placeholder="Phone"
-                    value={editBranch.phone}
+                    defaultValue={editBranch.phone}
                     onChange={getEditBranchPhone}
                   />
                 </div>

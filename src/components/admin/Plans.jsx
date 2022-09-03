@@ -30,7 +30,6 @@ export default function AdminPlans() {
       })
       .catch((err) => {
         console.log(err);
-        alert(err);
       });
   }, []);
 
@@ -48,7 +47,7 @@ export default function AdminPlans() {
           })
         );
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   };
 
   const deleteClass = (e, id) => {
@@ -129,7 +128,6 @@ export default function AdminPlans() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data.detail);
         });
     }
   };
@@ -252,7 +250,6 @@ export default function AdminPlans() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data.detail);
         });
     }
   };
@@ -276,7 +273,7 @@ export default function AdminPlans() {
                     type="text"
                     className="form-control"
                     placeholder="Name"
-                    value={editPlan.name}
+                    defaultValue={editPlan.name}
                     onChange={getEditPlanName}
                   />
                 </div>
@@ -286,7 +283,7 @@ export default function AdminPlans() {
                     type="text"
                     className="form-control"
                     placeholder="Price"
-                    value={editPlan.duration_months}
+                    defaultValue={editPlan.duration_months}
                     onChange={getEditPlanDuration}
                   />
                 </div>
@@ -296,7 +293,7 @@ export default function AdminPlans() {
                     type="text"
                     className="form-control"
                     placeholder="Price"
-                    value={editPlan.price}
+                    defaultValue={editPlan.price}
                     onChange={getEditPlanPrice}
                   />
                 </div>

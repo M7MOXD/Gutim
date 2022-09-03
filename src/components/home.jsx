@@ -164,7 +164,7 @@ export default function Home() {
                 <div className="col-lg-4 col-md-6 my-5">
                   <div className="single-trainer-item">
                     <img
-                      src={`http://localhost:8000${trainer.image}`}
+                      src={`https://gymmanagementapi.herokuapp.com${trainer.image}`}
                       height="550"
                       alt=""
                     />

@@ -14,7 +14,6 @@ export default function AdminUsers() {
       })
       .catch((err) => {
         console.log(err);
-        alert(err);
       });
   }, []);
 
